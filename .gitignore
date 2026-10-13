@@ -1,0 +1,10 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.streamlit/secrets.toml
+aspect_sentiment_model_final.pt
+skincare_reviews_with_predictions.csv
+models/
+kaggle.json
