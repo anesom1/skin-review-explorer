@@ -1,70 +1,99 @@
 # 🧴 Skincare Review Explorer & AI Sentiment Analyzer
 
-An interactive web application and aspect-based sentiment analysis tool built for skincare reviews. This project explores customer feedback across specific product attributes—**texture, scent, breakouts, irritation, efficacy, packaging, and value**—using a fine-tuned Multi-Head DistilBERT model.
+This project is about analyzing skincare reviews and understanding what customers think about different aspects of a product. I built a machine learning model that looks at reviews and predicts whether customers have positive or negative opinions about things like texture, scent, breakouts, irritation, effectiveness, packaging, and value for money.
+
+I also created a Streamlit web app where users can explore the results and try the sentiment analyzer themselves.
 
 ---
 
 ## 🚀 Live Demo
-- **App URL:** [Check out the live app here](https://skin-review-explorer-avxvp6kng5tozxvacx3hrr.streamlit.app)
+
+**Try the app here:** [Skincare Review Explorer](https://skin-review-explorer-avxvp6kng5tozxvacx3hrr.streamlit.app)
 
 ---
 
-## 📊 Project Overview & Pipeline
+## 📊 Project Overview
 
-The project follows a rigorous end-to-end Data Science & Machine Learning lifecycle across four distinct phases (available in the `notebooks/` directory):
+The project was divided into four main phases, which are documented in the `notebooks/` directory.
 
-1. **Phase 1: Data Exploration & Preprocessing**[cite: 2]
-   - **Raw Data:** Utilized a massive corpus of skincare product reviews (~944k rows) containing text, product details, ratings, and skin-type metadata[cite: 2].
-   - Handled missing values, cleaned text data, and filtered records for downstream tasks.
+### 1. Data Exploration and Preprocessing
 
-2. **Phase 2 & 3: Annotation & Model Training (PyTorch & Transformers)**[cite: 2]
-   - Created a labeled sample dataset to supervise aspect-level sentiment classification.
-   - Built a **Multi-Head Classifier** on top of `distilbert-base-uncased` utilizing the `[CLS]` token representation followed by independent linear heads for each of the 7 skincare aspects[cite: 2].
-   - Trained the model to predict 3 classes per aspect: `0` (*Not mentioned*), `1` (*Positive*), and `2` (*Negative*)[cite: 2].
+- Started with a dataset containing around 944,000 skincare reviews.
+- Explored the data, checked for missing values, and cleaned the review text.
+- Prepared the data for annotation and model training.
 
-3. **Phase 4: Full-Dataset Inference & Aggregation**[cite: 2]
-   - Executed batched inference over the entire clean dataset (~944k reviews) using the trained checkpoint (`aspect_sentiment_model_final.pt`)[cite: 2].
-   - Attached predictions back to the dataset (`skincare_reviews_with_predictions.csv`) and aggregated metrics at the product × skin-type level for rapid querying in the web app[cite: 2].
+### 2. Data Annotation
+
+- Created a labeled sample of reviews to train the model.
+- Added sentiment labels for seven skincare aspects: texture, scent, breakouts, irritation, efficacy, packaging, and value.
+
+### 3. Model Training
+
+- Used PyTorch and Hugging Face Transformers to fine-tune a DistilBERT model.
+- Built a multi-head classifier with a separate prediction head for each skincare aspect.
+- The model predicts one of three classes for each aspect:
+  - `0` – Not mentioned
+  - `1` – Positive
+  - `2` – Negative
+
+### 4. Predictions and Results
+
+- Used the trained model to generate predictions for around 944,000 reviews.
+- Saved the results in `skincare_reviews_with_predictions.csv`.
+- 
+---
+
+## 🛠️ Technologies Used
+
+- **Python, Pandas, NumPy** – Working with and preparing the data.
+- **PyTorch** – Building and training the model.
+- **Hugging Face Transformers** – Using and fine-tuning DistilBERT.
+- **Streamlit** – Building the web application.
+- **Plotly** – Creating interactive charts to explore sentiment results.
 
 ---
 
-## 🛠️ Tech Stack
-- **Python, Pandas, NumPy:** Data manipulation and transformation.
-- **PyTorch & Hugging Face Transformers:** Deep learning model architecture, custom dataset loaders, and tokenization (`AutoTokenizer`).
-- **Streamlit:** Interactive web application framework and multi-tab user interface.
-- **Plotly:** Dynamic, stack-barmode visualizations of sentiment distributions.
+## 📂 Project Structure
 
----
-
-## 📂 Repository Structure
-- `app_final.py`: Main Streamlit multi-tab application (Dashboard + Live AI Analyzer).
-- `requirements.txt`: Python package dependencies.
-- `notebooks/`: Jupyter notebooks detailing phases 1 through 4 of the data science lifecycle.
+- `app_final.py` – Main Streamlit application, including the dashboard and live AI analyzer.
+- `requirements.txt` – Required Python packages.
+- `notebooks/` – Jupyter notebooks covering the different project phases.
 
 ---
 
 ## 💻 How to Run Locally
 
-If you want to run this application on your local machine, follow these steps:
-
 ### 1. Clone the repository
+
 ```bash
-git clone [https://github.com/anesom1/skin-review-explorer](https://github.com/anesom1/skincare-review-explorer.git)
-cd skincare-review-explorer 
+git clone https://github.com/anesom1/skincare-review-explorer.git
+cd skincare-review-explorer
 ```
 
-### 2. Create and activate a virtual enviroment
-```bash 
+### 2. Create and activate a virtual environment
+
+```bash
 python3 -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/bin/activate
 ```
 
-### 3. Install dependencies
-```bash 
+On Windows, activate it with:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install the required packages
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Streamlit application
-```bash 
-python -m streamlit run app.py
+### 4. Start the application
+
+```bash
+python -m streamlit run app_final.py
 ```
+
+The app should open in your browser. You can then explore the dashboard and test the sentiment analyzer.
+
