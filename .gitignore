@@ -1,0 +1,18 @@
+# Virtual Environments
+venv/
+.venv/
+
+# Python & Caches
+__pycache__/
+*.pyc
+.DS_Store
+
+# Streamlit Secrets
+.streamlit/secrets.toml
+
+# Large Data & Models (Hosted on Hugging Face instead)
+kaggle.json
+aspect_sentiment_model_final.pt
+skincare_reviews_with_predictions.csv
+model/
+data/
